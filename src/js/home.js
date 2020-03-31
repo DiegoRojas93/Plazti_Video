@@ -1,21 +1,20 @@
-// De la forma de jQuery
+(async function load() {
+  //await = esperar
 
-$.ajax('https://randomuser.me/api/error',{
-  method: 'GET',
-  success: function (data) {
-    console.log(data);
-  },
-  error: function (error) {
-    console.log(error)
+  async function getData(url) {
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
   }
-})
 
-// De la forma de JavaScript vanilla
+  const actionList = await getData('https://yts.mx/api/v2/list_movies.json?genre=action')
+  const horrorList = await getData('https://yts.mx/api/v2/list_movies.json?genre=horror')
+  const animationList = await getData('https://yts.mx/api/v2/list_movies.json?genre=animation')
 
-fetch('https://randomuser.me/api/')
-  .then(function (response) {
-    // console.log(response)
-    return response.json()
-  })
-  .then((user) => console.log('User', user.results[0].name.first))
-  .catch(()=> console.log('Algo fallo'))
+  console.log('actionList', actionList);
+  console.log('horrorList', horrorList);
+  console.log('animationList', animationList);
+  console.log('');
+
+  console.log(actionList, horrorList, animationList);
+})()
