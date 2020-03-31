@@ -1,25 +1,21 @@
-const getUser1 = new Promise(function (todoBien, todoMal) {
-  // llama a una api
-  setTimeout(function () {
-    //luego de 3 segundos
-    todoBien()
-  },3000)
-})
-const getUser2 = new Promise(function (todoBien, todoMal) {
-  // llama a una api
-  setTimeout(function () {
-    //luego de 3 segundos
-    todoBien()
-  },5000)
+// De la forma de jQuery
+
+$.ajax('https://randomuser.me/api/error',{
+  method: 'GET',
+  success: function (data) {
+    console.log(data);
+  },
+  error: function (error) {
+    console.log(error)
+  }
 })
 
+// De la forma de JavaScript vanilla
 
-
-Promise.all([getUser1,getUser2]) // retorna una respuesta si todas las promesas son ejejutadas
-  .then(()=>console.log('Todo está Bien en la vida 😀'))
-  .catch((message)=>console.log(message))
-
-
-Promise.race([getUser1,getUser2])// retorna una respuesta de la promesas se que sea ejecutada de la forma mas rapida
-  .then(()=>console.log('Todo está Bien en la vida 2😀'))
-  .catch((message)=>console.log(message))
+fetch('https://randomuser.me/api/')
+  .then(function (response) {
+    // console.log(response)
+    return response.json()
+  })
+  .then((user) => console.log('User', user.results[0].name.first))
+  .catch(()=> console.log('Algo fallo'))
