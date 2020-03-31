@@ -1,25 +1,21 @@
 # jQuery
 
-### Selectores
+### Creación de templates
 
-Un selector nos sirve para poder manipular un objeto del DOM, puedes buscar dicho objeto ya sea por su id, clase, atributo, etc.
+Vamos a crear una plantilla con nuestro elemento base, dicha plantilla será recibirá valores dinámicos.
 
-Para PlatziVideo necesitamos un selector de un contenedor para ponerle dentro la lista de películas.
+Dentro de jQuery, la creación de un template seria con un texto base y si nuestro texto cuenta con distintas líneas más aparte tuviera valores dinámicos se vería de la siguiente forma:
 
-En jQuery hacemos un selector de la siguiente forma:
+```html
+‘<div class=”container”>’ +
+    ‘<p id=’+ id +’>Hola Mundo<p>’ +
+‘<div>’
+```
 
-- const $home = $(‘ .home ’);
+Desde ECMAScript 6 contamos con una nueva característica llamada template literals que se representan con las comillas invertidas ``, el ejemplo anterior pasaría a verse de esta forma:
 
-Por convención una variable que este represente un objeto del DOM lleva el signo $, esto es para tener claro que estamos manipulando un objeto del DOM y no algún tipo de información o dato.
-
-Dentro de JavaScript existen distintas funciones para hacer selectores, entre ellas se encuentra:
-
--getElementById: recibe como parámetro el id del objeto del DOM que estás buscando. Te regresa un solo objeto.
-
--getElementsByTagName: recibe como parámetro el tag que estas buscando y te regresa una colección html de los elementos que tengan ese tag.
-
--getElementsByClassName: recibe como parámetro la clase y te regresa una colección html de los elementos que tengan esa clase.
-
--querySelector: va a buscar el primer elemento que coincida con el selector que le pases como parámetro.
-
--querySelectorAll: va a buscar todos los elementos que coincidan con el selector que le pases como parámetro.
+```html
+`<div class=”container”>
+    <p id=${id}>Hola Mundo<p>
+<div>`
+```
