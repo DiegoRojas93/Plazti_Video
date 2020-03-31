@@ -1,9 +1,25 @@
 # jQuery
 
-### Funciones asíncronas
+### Selectores
 
-Una función asíncrona va a ser como una función normal, pero poniendo código asíncrono de forma que sea más fácil de leer de forma síncrona.
+Un selector nos sirve para poder manipular un objeto del DOM, puedes buscar dicho objeto ya sea por su id, clase, atributo, etc.
 
-Para declarar una función asíncrona se usa la palabra reservada async, luego de eso declaras tu función de forma normal. Dentro de una función asíncrona cuentas con otra palabra reservada llamada await, lo que hará esta palabra es indicar que se debe esperar a que termine de ejecutarse ese fragmento de código antes de continuar.
+Para PlatziVideo necesitamos un selector de un contenedor para ponerle dentro la lista de películas.
 
-Vamos a realizar peticiones con fetch a la API de yts para pedirle películas según su categoría y mostrarlas dentro de PlatziVideo. Sin el uso de funciones asíncronas para cada fetch tendríamos que usar los métodos then y catch, en cambio gracias a async/await solo debemos escribir la palabra await antes de cada promesa.
+En jQuery hacemos un selector de la siguiente forma:
+
+- const $home = $(‘ .home ’);
+
+Por convención una variable que este represente un objeto del DOM lleva el signo $, esto es para tener claro que estamos manipulando un objeto del DOM y no algún tipo de información o dato.
+
+Dentro de JavaScript existen distintas funciones para hacer selectores, entre ellas se encuentra:
+
+-getElementById: recibe como parámetro el id del objeto del DOM que estás buscando. Te regresa un solo objeto.
+
+-getElementsByTagName: recibe como parámetro el tag que estas buscando y te regresa una colección html de los elementos que tengan ese tag.
+
+-getElementsByClassName: recibe como parámetro la clase y te regresa una colección html de los elementos que tengan esa clase.
+
+-querySelector: va a buscar el primer elemento que coincida con el selector que le pases como parámetro.
+
+-querySelectorAll: va a buscar todos los elementos que coincidan con el selector que le pases como parámetro.
