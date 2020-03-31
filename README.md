@@ -1,19 +1,12 @@
 # jQuery
 
-jQuery es una librería de JavaScript que hizo su lanzamiento en el año 2006 con el fin de resolver diferentes problemáticas:
+### Variables y Funciones
 
-- Una misma forma de acceder al DOM.
-- Poder interactuar con datos de un servidor.
-- Crear animaciones.
+En la primera parte de este curso vamos a buscar traer datos de un servicio externo, para ello vamos a utilizar la mezcla de varias combinaciones: Promesas, ajax/fecth y funciones asíncronas. Antes de implementar una Promesa debes saber dos cosas necesarias: Variables y Funciones.
 
-El problema con jQuery surgió cuando se empezó a exagerar su uso y darle menor importancia a aprender JavaScript. Esto genero malos hábitos de aprendizaje y hasta en algunos casos no diferenciar jQuery de JavaScript.
+Dentro de JavaScript tenemos tres formas de declarar una variable las cuales son: var, const y let.
 
-A la par de que algunos se quedaban en jQuery, estaba ocurriendo la revolución de JavaScript trayendo consigo librerías que resolvían problemas específicos.
+-var era la forma en que se declaraban las variables hasta ECMAScript 5.
+-const y let es la forma en que se declaran las variables a partir de ECMAScript 6, const sirve para declarar variables que nunca van a ser modificadas y encambio let son variables que pueden ser modificadas.
 
-Aun con estas nuevas librerías, seguía sin resolverse el problema de hacer que uno aprenda mas JavaScript que librerías o frameworks pues uno igual puede abusar de Vue, React o Angular.
-
-Por eso en este curso aprenderás a NO depender de ninguna librería, las ventajas de esto son:
-
-- Reutilizar conocimientos.
-- Poder implementar soluciones sin dependencias.
-- Estar más capacitado para las grandes empresas.
+Las funciones son piezas de código que puedes reutilizar y se declaran con la palabra function.
