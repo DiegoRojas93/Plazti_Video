@@ -8,9 +8,11 @@
   }
 
   const actionList = await getData('https://yts.mx/api/v2/list_movies.json?genre=action');
-  const dramaList = await getData;('https://yts.mx/api/v2/list_movies.json?genre=drama')
+  const dramaList = await getData('https://yts.mx/api/v2/list_movies.json?genre=drama')
   const animationList = await getData('https://yts.mx/api/v2/list_movies.json?genre=animation');
-  console.log(actionList)
+  console.log('accion',actionList)
+  console.log('drama',dramaList)
+  console.log('animation',animationList)
 
   function videoItemTemplate(movie){
     return (
@@ -25,29 +27,32 @@
     )
   }
 
+  function createTemplate(HTMLString) {
+    const $html = document.implementation.createHTMLDocument();
+    $html.body.innerHTML = HTMLString
+    return $html.body.children[0]
+  }
+
+  function renderMovieList(list,$container) {
+    //list = acttionList.datamovies
+    $container.children[0].remove()
+    list.forEach((movie) =>{
+      const HTMLString = videoItemTemplate(movie)
+      const movieElement = createTemplate(HTMLString)
+      $container.append(movieElement)
+    })
+  }
+
   const $actionContainer = document.querySelector('#action')
+  renderMovieList(actionList.data.movies, $actionContainer)
 
-  actionList.data.movies.forEach((movie) =>{
-    const HTMLString = videoItemTemplate(movie)
+  const $dramaContainer = document.getElementById('drama')
+  renderMovieList(dramaList.data.movies, $dramaContainer)
 
-    const $html = document.implementation.createHTMLDocument()
-    // crea en memoria del JS un documento HTML
-
-    $html.body.innerHTML = HTMLString //innerHTML agrega mas codigo html por medio de strings, en este caso el HTMLString
-
-    // debugger
+  const $animationContainer = document.getElementById('animation')
+  renderMovieList(animationList.data.movies, $animationContainer)
 
 
-    $actionContainer.append($html.body.children[0]) // append hace añadir el HTMLString (codigo) al final de $acttion container del html
-
-    //children[0]=children es una propiedad que solo selecciona la seccion que sea tomada por su parametro en este caso el el primero
-  })
-
-
-
-  
-  const $dramaContainer = document.getElementById('#drama')
-  const $animationContainer = document.getElementById('#animation')
   const $featuringContainer = document.getElementById('#featuring')
   const $form = document.getElementById('#form')
   const $home = document.getElementById('#home')
