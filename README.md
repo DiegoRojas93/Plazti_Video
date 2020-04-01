@@ -1,9 +1,16 @@
 # jQuery
 
-### Eventos
+### Clases y estilos CSS
 
 
-Toda aplicación web necesita lidiar con interacciones del usuario, desde un click hasta arrastrar algún elemento, estas interacciones son escuchadas por el navegador mediante algo llamado eventos. Existen muchos tipos de eventos, el más común es el evento de click.
-En esta clase vamos a trabajar con el evento click y submit.
-Para que un elemento HTML pueda escuchar algún evento debemos usar el método addEventListener. Este método recibe dos parámetros, el nombre del evento que va a escuchar y la función que se va a ejecutar al momento de que se accione el evento.
-La página se recarga al momento de ejecutarse el evento submit, para evitar esto debemos quitarle la acción por defecto que viene en submit usando el método event.preventDefault().
+En esta clase vamos a aprender a manipular las clases de CSS y estilos de nuestros elementos mediante JavaScript.
+
+Dentro de cada elemento tenemos un método llamado classList, con este podemos ver las clases que tiene nuestro elemento y además llamar a otros métodos para añadir, borrar o hacer toggle a alguna clase.De igual forma podemos acceder a todas las propiedades de CSS algún elemento mediante element.style.
+
+**Nota:** podemos desde la consola modificar una clase de una etiqueta HTML o un estilo de CSS, con el fin ver como se ejecuta un experimento nuestro desde la consola de tu navegador.
+
+1. Elige la etiqueta por medio de un click en la consola HTML de tu navegador.
+2. Escribe en la consola de Javascript el parametro $0 segido de .className
+3. hay podemos elegir si utilizar .add() .remove() o toggle()
+
+_nota:_toggle('') se utiliza para ejecutar .add() o .remove() pero validando si esta o no esta el elemento dentro de la clase.

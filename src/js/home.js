@@ -7,9 +7,11 @@
     return data
   }
   const $form = document.getElementById('form')
+  const $home = document.getElementById('home')
 
   $form.addEventListener('submit',(event) => {
     event.preventDefault()
+    $home.classList.add('search-active')
   })
 
   const actionList = await getData('https://yts.mx/api/v2/list_movies.json?genre=action');
@@ -43,7 +45,7 @@
     //Para que un elemento HTML pueda escuchar algún evento debemos usar el método addEventListener. Este método recibe dos parámetros, el nombre del evento que va a escuchar y la función que se va a ejecutar al momento de que se accione el evento.
 
     $element.addEventListener('click', () => {
-      alert('Click')
+      showModal()
     })
 
     //para la forma de jQuery deberia hacerce se esta forma
@@ -71,7 +73,6 @@
 
 //
   const $featuringContainer = document.getElementById('#featuring')
-  const $home = document.getElementById('#home')
 
 
   const $modal = document.getElementById('modal')
@@ -81,5 +82,17 @@
   const $modalTitle= $modal.querySelector('h1')
   const $modalImage= $modal.querySelector('img')
   const $modalDescription= $modal.querySelector('p')
+
+  function showModal() {
+    $overlay.classList.add('active');
+    $modal.style.animation = 'modalIn .8s forwards';
+  }
+
+  const hideModal = () => {
+    $overlay.classList.remove('active'); //podemos modificar el nombre de la clase de HTML
+    $modal.style.animation = 'modalOut .8s forwards'; // modificamos el los estilos de css por su clase
+  }
+
+  $hideModal.addEventListener('click',hideModal)
 
 })()
