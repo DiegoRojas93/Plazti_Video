@@ -25,12 +25,27 @@
     )
   }
 
+  const $actionContainer = document.querySelector('#action')
+
   actionList.data.movies.forEach((movie) =>{
     const HTMLString = videoItemTemplate(movie)
-    console.log(HTMLString);
+
+    const $html = document.implementation.createHTMLDocument()
+    // crea en memoria del JS un documento HTML
+
+    $html.body.innerHTML = HTMLString //innerHTML agrega mas codigo html por medio de strings, en este caso el HTMLString
+
+    // debugger
+
+
+    $actionContainer.append($html.body.children[0]) // append hace añadir el HTMLString (codigo) al final de $acttion container del html
+
+    //children[0]=children es una propiedad que solo selecciona la seccion que sea tomada por su parametro en este caso el el primero
   })
 
-  const $actionContainer = document.querySelector('#action')
+
+
+  
   const $dramaContainer = document.getElementById('#drama')
   const $animationContainer = document.getElementById('#animation')
   const $featuringContainer = document.getElementById('#featuring')
