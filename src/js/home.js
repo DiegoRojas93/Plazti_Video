@@ -6,6 +6,11 @@
     const data = await response.json()
     return data
   }
+  const $form = document.getElementById('form')
+
+  $form.addEventListener('submit',(event) => {
+    event.preventDefault()
+  })
 
   const actionList = await getData('https://yts.mx/api/v2/list_movies.json?genre=action');
   const dramaList = await getData('https://yts.mx/api/v2/list_movies.json?genre=drama')
@@ -33,13 +38,25 @@
     return $html.body.children[0]
   }
 
+  function addEventClick($element) {
+
+    //Para que un elemento HTML pueda escuchar algún evento debemos usar el método addEventListener. Este método recibe dos parámetros, el nombre del evento que va a escuchar y la función que se va a ejecutar al momento de que se accione el evento.
+
+    $element.addEventListener('click', () => {
+      alert('Click')
+    })
+
+    //para la forma de jQuery deberia hacerce se esta forma
+    // $('div,'.normalize('click', ()=>{}))
+  }
   function renderMovieList(list,$container) {
     //list = acttionList.datamovies
     $container.children[0].remove()
     list.forEach((movie) =>{
       const HTMLString = videoItemTemplate(movie)
       const movieElement = createTemplate(HTMLString)
-      $container.append(movieElement)
+      $container.append(movieElement);
+      addEventClick(movieElement)
     })
   }
 
@@ -52,9 +69,8 @@
   const $animationContainer = document.getElementById('animation')
   renderMovieList(animationList.data.movies, $animationContainer)
 
-
+//
   const $featuringContainer = document.getElementById('#featuring')
-  const $form = document.getElementById('#form')
   const $home = document.getElementById('#home')
 
 
