@@ -1,16 +1,43 @@
 # jQuery
 
-### Creación de elementos y asignación de atributos
+### FORMULARIOS
+
+Este es el resumen de la clase de formularios (Esta es una pequeña muestra de lo que se puede hacer ****new FormData**** en nuestros proyectos).
+
+Podemos tomar la información que se deja en un formulario de un sitio web  al fijarla cuando escribimos sobre ella. Uno de los atributos de form o un input en HTML es **name**, en ella guarda en memoria la  información de que dejamos escrito.
 
 
-En esta clase vamos a aprender a manipular las clases de CSS y estilos de nuestros elementos mediante JavaScript.
+```
+<form action="" class="search" id="form">
+<input type="text" name="name" placeholder="Buscar un artista o tema favorito"/>
+</form>
+```
+Para obtener toda la información a javaScript la conseguimos creando un nuevo objeto (inf de FormData: https://developer.mozilla.org/es/docs/Web/Guide/Usando_Objetos_FormData#Creaci%C3%B3n_de_un_objeto_FormData_desde_cero)
 
-Dentro de cada elemento tenemos un método llamado classList, con este podemos ver las clases que tiene nuestro elemento y además llamar a otros métodos para añadir, borrar o hacer toggle a alguna clase.De igual forma podemos acceder a todas las propiedades de CSS algún elemento mediante element.style.
 
-**Nota:** podemos desde la consola modificar una clase de una etiqueta HTML o un estilo de CSS, con el fin ver como se ejecuta un experimento nuestro desde la consola de tu navegador.
+```
+const data = new FormData($form);
+```
+ó
 
-1. Elige la etiqueta por medio de un click en la consola HTML de tu navegador.
-2. Escribe en la consola de Javascript el parametro $0 segido de .className
-3. hay podemos elegir si utilizar .add() .remove() o toggle()
+```
+const data = new FormData(document.getElementById('form'));
+```
+para obtener el dato que pusimos por parámetro en nuestro formulario es por el método get.
 
-_nota:_toggle('') se utiliza para ejecutar .add() o .remove() pero validando si esta o no esta el elemento dentro de la clase.
+```
+const informacion = data.get('name');
+console.log(informacion);
+	// Avengers
+```
+
+**_Nota:_**para establecer datos de un formulario en JavaScript utilizamos el método get.
+
+```
+const nuevaData = new FormData(document.getElementById('form') )
+nuevaData.set('name','avengers')
+```
+para verla la podemos visualizar en cosola utilizado el método get ya anteriormente dicho.
+```
+data.get('name');
+```
