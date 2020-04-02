@@ -53,22 +53,23 @@
         movies : pelis
       }
     } = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+
     const HTMLString = featuringTemplate(pelis[0])
     $featuringContainer.innerHTML = HTMLString
-    debugger
   })
 
-  const actionList = await getData(`${BASE_API}list_movies.json?genre=action`);
-  const dramaList = await getData(`${BASE_API}list_movies.json?genre=drama`)
-  const animationList = await getData(`${BASE_API}list_movies.json?genre=animation`);
+  const {data: {movies:actionList} } = await getData(`${BASE_API}list_movies.json?genre=action`);
+  const {data: {movies:dramaList} } = await getData(`${BASE_API}list_movies.json?genre=drama`)
+  const {data: {movies:animationList} } = await getData(`${BASE_API}list_movies.json?genre=animation`);
   console.log('accion',actionList)
   console.log('drama',dramaList)
   console.log('animation',animationList)
 
-  function videoItemTemplate(movie){
+  function videoItemTemplate(movie,category){
     return (
-      `<div class="primaryPlaylistItem">
-        <div class="primaryPlaylistItem-image">
+      `<div class="primaryPlaylistItem" data-id="${movie.id}" data-category=${category}>
+        <div class="primaryPlaylistItem-image"
+          <p${movie.id}></p>
           <img src="${movie.medium_cover_image}">
         </div>
         <h4 class="primaryPlaylistItem-title">
@@ -85,21 +86,15 @@
   }
 
   function addEventClick($element) {
-
-    //Para que un elemento HTML pueda escuchar algún evento debemos usar el método addEventListener. Este método recibe dos parámetros, el nombre del evento que va a escuchar y la función que se va a ejecutar al momento de que se accione el evento.
-
     $element.addEventListener('click', () => {
-      showModal()
+      showModal($element)
     })
-
-    //para la forma de jQuery deberia hacerce se esta forma
-    // $('div,'.normalize('click', ()=>{}))
   }
-  function renderMovieList(list,$container) {
+  function renderMovieList(list,$container,category) {
     //list = acttionList.datamovies
-    $container.children[0].remove()
+    $container.children[0].remove();
     list.forEach((movie) =>{
-      const HTMLString = videoItemTemplate(movie)
+      const HTMLString = videoItemTemplate(movie,category)
       const movieElement = createTemplate(HTMLString)
       $container.append(movieElement);
       addEventClick(movieElement)
@@ -107,13 +102,13 @@
   }
 
   const $actionContainer = document.querySelector('#action')
-  renderMovieList(actionList.data.movies, $actionContainer)
+  renderMovieList(actionList,$actionContainer, 'action')
 
   const $dramaContainer = document.getElementById('drama')
-  renderMovieList(dramaList.data.movies, $dramaContainer)
+  renderMovieList(dramaList, $dramaContainer, 'drama')
 
   const $animationContainer = document.getElementById('animation')
-  renderMovieList(animationList.data.movies, $animationContainer)
+  renderMovieList(animationList, $animationContainer, 'animation')
 
 //
 
@@ -126,16 +121,18 @@
   const $modalImage= $modal.querySelector('img')
   const $modalDescription= $modal.querySelector('p')
 
-  function showModal() {
+
+
+  function showModal($element) {
     $overlay.classList.add('active');
     $modal.style.animation = 'modalIn .8s forwards';
-  }
-
-  const hideModal = () => {
-    $overlay.classList.remove('active'); //podemos modificar el nombre de la clase de HTML
-    $modal.style.animation = 'modalOut .8s forwards'; // modificamos el los estilos de css por su clase
+    const id = $element.dataset.id;
+    const category = $element.dataset.category;
   }
 
   $hideModal.addEventListener('click',hideModal)
-
+  function hideModal() {
+    $overlay.classList.remove('active'); //podemos modificar el nombre de la clase de HTML
+    $modal.style.animation = 'modalOut .8s forwards'; // modificamos el los estilos de css por su clase
+  }
 })()
