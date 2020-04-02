@@ -1,6 +1,6 @@
 # jQuery
 
-### Clases y estilos CSS
+### Creación de elementos y asignación de atributos
 
 
 En esta clase vamos a aprender a manipular las clases de CSS y estilos de nuestros elementos mediante JavaScript.
