@@ -1,3 +1,3 @@
 # jQuery
 
-### Animaciones
+### Manejo de errores
