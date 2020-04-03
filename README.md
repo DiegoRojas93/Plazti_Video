@@ -1,20 +1,30 @@
 # jQuery
 
-### DataSet
+### Encontrando elementos en lista (find)
 
-Dataset permite acceder a un objeto con todos los atributos data de un elemento DOM.
-
-```html
-<div id="element" data-id="10" data-category="action">
-</div>
-```
+find() devuelve el primer elemento de un array que cumpla con el criterio de búsqueda. Si no se encuentra ningún elemento devuelve undefined.
 
 ```javascript
 
-const $element = document.getElementById("element");
+function find(list, id) {
+  return list.find(movie => movie.id === id)
+}
+```
+Información referencial: https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/find
 
-//guarda el valor de data-id
-const id = $element.dataset.id;
-//guarda el valor de data-category
-const category = $element.dataset.category;
+### Switch
+
+```javascript
+
+switch (category) {
+  case "action": {
+    //código de action
+  }
+  case "drama": {
+    //código de drama
+  }
+  default: {
+    //código por defecto
+  }
+}
 ```

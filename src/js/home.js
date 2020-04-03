@@ -117,17 +117,35 @@
   const $overlay = document.getElementById('overlay')
   const $hideModal = document.getElementById('hide-modal')
 
-  const $modalTitle= $modal.querySelector('h1')
-  const $modalImage= $modal.querySelector('img')
-  const $modalDescription= $modal.querySelector('p')
+  const $modalTitle = $modal.querySelector('h1')
+  const $modalImage = $modal.querySelector('img')
+  const $modalDescription = $modal.querySelector('p')
 
+  function findById(List, id) {
+    return List.find(movie=> movie.id === parseInt(id,10))
+  }
 
+  function findMovie(id, category) {
+    switch (category) {
+      case 'animation':
+        return findById(animationList,id)
+      case 'action':
+        return findById(actionList,id)
+      default:
+        return findById(dramaList,id)
+    }
+  }
 
   function showModal($element) {
     $overlay.classList.add('active');
     $modal.style.animation = 'modalIn .8s forwards';
     const id = $element.dataset.id;
     const category = $element.dataset.category;
+    const data = findMovie(id,category)
+
+    $modalTitle.textContent = data.title
+    $modalDescription.textContent = data.description_full
+    $modalImage.setAttribute('src', data.medium_cover_image)
   }
 
   $hideModal.addEventListener('click',hideModal)
