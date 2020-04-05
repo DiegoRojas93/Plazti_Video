@@ -111,19 +111,35 @@
     })
   }
 
+  //Si hay datos de api alamacenados en localStorage hay que traerlos y si no los tiene, hay que Pedirlos y almacenarlos.
 
-  const {data: {movies:animationList} } = await getData(`${BASE_API}list_movies.json?genre=animation`);
-  window.localStorage.setItem('animationList', JSON.stringify(animationList))
+  async function cacheExist(category) {
+    const listName = `${category}List`;
+
+    const cacheList = window.localStorage.getItem(listName);
+
+    if(cacheList){
+      return JSON.parse(cacheList)
+    }
+
+    const {data: {movies: data} } = await getData(`${BASE_API}list_movies.json?genre=${category}`);
+
+    window.localStorage.setItem(listName, JSON.stringify(data))
+
+    return data
+  }
+
+
+  // const {data: {movies:animationList} } = await getData(`${BASE_API}list_movies.json?genre=animation`);
+  const animationList = await cacheExist('animation')
   const $animationContainer = document.getElementById('animation')
   renderMovieList(animationList, $animationContainer, 'animation')
 
-  const {data: {movies:actionList} } = await getData(`${BASE_API}list_movies.json?genre=action`);
-  window.localStorage.setItem('actionList', JSON.stringify(actionList))
+  const actionList = await cacheExist ('action')
   const $actionContainer = document.querySelector('#action')
   renderMovieList(actionList,$actionContainer, 'action')
 
-  const {data: {movies:dramaList} } = await getData(`${BASE_API}list_movies.json?genre=drama`)
-  window.localStorage.setItem('dramaList', JSON.stringify(dramaList))
+  const dramaList= await cacheExist ('drama')
   const $dramaContainer = document.getElementById('drama')
   renderMovieList(dramaList, $dramaContainer, 'drama')
 
