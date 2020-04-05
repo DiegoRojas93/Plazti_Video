@@ -185,3 +185,50 @@
     $modal.style.animation = 'modalOut .8s forwards'; // modificamos el los estilos de css por su clase
   }
 })()
+
+
+//------------------------usuarios random--------------------------
+async function load2 () {
+
+  async function getData(url) {
+    try {
+      const response = await fetch(url)
+      const data = await response.json()
+      return data
+    } catch (error) {
+      throw new Error('No se encontro ningun resultado')
+    }
+  }
+
+
+  
+  function template(personData) {
+    return(
+      `<a href="#" class="container_Friend">
+      <img src="${personData.picture.thumbnail}" alt="echame la culpa" />
+      <span>
+      ${personData.name.first} ${personData.name.last}
+      </span>
+      </a>`
+    )
+  }
+  async function random() {
+    for (let i = 0; i < document.getElementsByClassName('playlistFriends-item').length; i++) { // este codigo mira la catidad de veces que tengo la misma  clase en html
+      const {results: users} = await getData('https://randomuser.me/api/')
+      let $Friend_item = document.getElementsByClassName('playlistFriends-item')[i]
+      users.forEach(personData => {
+        // console.log($Friend_item);
+        // console.log('personData',personData);
+        const HTMLString = template(personData);
+        var html = document.implementation.createHTMLDocument()
+        html.body.innerHTML = HTMLString
+        $Friend_item.append(html.body.children[0])
+        // console.log($Friend_item);
+      })
+    }
+  }
+
+  await random()
+}
+
+load2()
