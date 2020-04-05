@@ -38,6 +38,7 @@
   }
 
 
+
   $form.addEventListener('submit', async (event) => {
     event.preventDefault() //no recarga la pag web cuando enviamos datos
     $home.classList.add('search-active')
@@ -84,6 +85,7 @@
     )
   }
 
+
   function createTemplate(HTMLString) {
     const $html = document.implementation.createHTMLDocument();
     $html.body.innerHTML = HTMLString
@@ -129,8 +131,29 @@
     return data
   }
 
+  const fictionList = await cacheExist('Sci-Fi')
 
-  // const {data: {movies:animationList} } = await getData(`${BASE_API}list_movies.json?genre=animation`);
+  function templatePlayList(title){
+    return(
+      `<li class="myPlaylist-item">
+        <a href="#">
+          <span>
+          ${title}
+          </span>
+        </a>
+      </li>`
+    )
+  }
+
+  fictionList.forEach((movie)=>{
+      const $playList = document.getElementsByClassName('myPlaylist')[0]
+      const HTMLString = templatePlayList(movie.title);
+      const div = document.createElement('div')
+      div.innerHTML = HTMLString
+      $playList.append(div.children[0])
+  })
+
+
   const animationList = await cacheExist('animation')
   const $animationContainer = document.getElementById('animation')
   renderMovieList(animationList, $animationContainer, 'animation')
@@ -184,6 +207,7 @@
     $overlay.classList.remove('active'); //podemos modificar el nombre de la clase de HTML
     $modal.style.animation = 'modalOut .8s forwards'; // modificamos el los estilos de css por su clase
   }
+
 })()
 
 
@@ -201,7 +225,7 @@ async function load2 () {
   }
 
 
-  
+
   function template(personData) {
     return(
       `<a href="#" class="container_Friend">

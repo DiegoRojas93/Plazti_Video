@@ -57,6 +57,7 @@ body {
 }
 
 .sidebarPlaylist {
+  padding: 5px;
   overflow: auto;
 }
 
